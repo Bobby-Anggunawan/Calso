@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "951208361900",
+    "project_id": "calso-8ca98",
+    "storage_bucket": "calso-8ca98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951208361900:android:cff5f26ce38aa3f945c409",
+        "android_client_info": {
+          "package_name": "com.calso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951208361900-2tl7t71beeer8pontrf4vs5q4il6rk19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.calso",
+            "certificate_hash": "a9552bbbc63131c24c61753ae5bba1dec71dd4d8"
+          }
+        },
+        {
+          "client_id": "951208361900-et5qrls1umtiu3ttv0rabuf31epcssrq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6NqqCQZpB1Vut3adLEA4SZorTybnvzEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951208361900-et5qrls1umtiu3ttv0rabuf31epcssrq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
