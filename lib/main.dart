@@ -1,3 +1,4 @@
+import 'package:calso/chat_page.dart';
 import 'package:calso/home_page.dart';
 import 'package:calso/login_page.dart';
 import 'package:calso/mediator.dart';
@@ -29,6 +30,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/home': (context) => HomePage(),
         '/login': (context) => LoginPage(),
+        '/chat': (context) => ChatPage(),
         '/': (context) => Mediator(),
       },
 

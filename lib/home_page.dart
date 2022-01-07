@@ -1,6 +1,9 @@
+import 'package:calso/data/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'data/model/chatList.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,29 +11,20 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    //ambil nomor telpon
-    //todo keknya mau dihapus
-    FirebaseAuth auth = FirebaseAuth.instance;
-    String phoneNum = "null";
-    if(auth.currentUser?.phoneNumber != null){
-      phoneNum = auth.currentUser!.phoneNumber!;
-    }
-
-    //read data
-    CollectionReference chatList = FirebaseFirestore.instance.collection('chatList');
+    var repo = Repository();
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Calso"),
       ),
       body: FutureBuilder(
-          future: chatList.where("me", isEqualTo: phoneNum).get(),
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+          future: repo.getChatList(),
+          builder: (BuildContext context, AsyncSnapshot<List<QueryDocumentSnapshot<Object?>>> snapshot){
             if (snapshot.hasError){
               return Text(snapshot.error.toString());
             }
             if (snapshot.connectionState == ConnectionState.done) {
-              var data = snapshot.data!.docs;
+              var data = snapshot.data!;
 
               //kalo data kosong
               if(data.isEmpty){
@@ -42,19 +36,19 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index){
                     return TextButton(
                       onPressed: () {
-                        // Respond to button press
+                        Navigator.pushNamed(context, "/chat", arguments: data[index]["roomID"]);
                       },
                       child: Row(
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.network(
-                              data[index]['personPicture'],
+                              data[index]["personPicture"],
                               height: 150.0,
                               width: 100.0,
                             ),
                           ),
-                          Text(data[index]['personName']),
+                          Text(data[index]["personName"]),
                         ]
                       ),
                     );
