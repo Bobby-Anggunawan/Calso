@@ -17,6 +17,12 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Calso"),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.contacts),
+        onPressed: (){
+          Navigator.pushNamed(context, "/contact");
+        }
+      ),
       body: FutureBuilder(
           future: repo.getChatList(),
           builder: (BuildContext context, AsyncSnapshot<List<QueryDocumentSnapshot<Object?>>> snapshot){
@@ -41,10 +47,10 @@ class HomePage extends StatelessWidget {
                       child: Row(
                         children: [
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(50.0),
                             child: Image.network(
                               data[index]["personPicture"],
-                              height: 150.0,
+                              height: 100.0,
                               width: 100.0,
                             ),
                           ),

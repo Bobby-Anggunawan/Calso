@@ -15,6 +15,7 @@ class _ChatPageState extends State<ChatPage> {
 
     final roomID = ModalRoute.of(context)!.settings.arguments as String;
     var repo = Repository();
+    var textController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -68,6 +69,7 @@ class _ChatPageState extends State<ChatPage> {
                       SizedBox(width: 15,),
                       Expanded(
                         child: TextField(
+                          controller: textController,
                           decoration: InputDecoration(
                               hintText: "Write message...",
                               hintStyle: TextStyle(color: Colors.black54),
@@ -78,7 +80,9 @@ class _ChatPageState extends State<ChatPage> {
                       SizedBox(width: 15,),
                       FloatingActionButton(
                         onPressed: (){
-                          //todo buat efent kirim pesan saat tombol ditekan
+                          //todo buat event kirim pesan saat tombol ditekan
+                          repo.writeMessage(textController.value.text, roomID);
+                          textController.clear();
                         },
                         child: Icon(Icons.send,color: Colors.white,size: 18,),
                         backgroundColor: Colors.blue,

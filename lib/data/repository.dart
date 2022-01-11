@@ -2,6 +2,8 @@ import 'package:calso/data/model/chatList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'model/aMessage.dart';
+
 class Repository{
   //current user data
   static FirebaseAuth? auth = null;
@@ -36,6 +38,22 @@ class Repository{
       pesan = FirebaseFirestore.instance.collection('pesan');
     }
     return pesan!.where("roomID", isEqualTo: roomID).snapshots();
+  }
+
+  void writeMessage(String message, String roomID){
+    if(pesan == null){
+      pesan = FirebaseFirestore.instance.collection('pesan');
+    }
+
+    pesan!.add(
+        Message(
+            content: message,
+            iSendIt: true,
+            roomID: roomID,
+            senderName: "bobby",
+            timestamp: DateTime.now().millisecondsSinceEpoch
+        ).toJson()
+    );
   }
 
 }
