@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 
 const Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
@@ -93,7 +94,37 @@ class Bubble extends StatelessWidget {
   }
 }
 
-class DemoChat extends StatelessWidget {
+
+class DateHeader extends StatelessWidget {
+  const DateHeader({Key? key, required this.date}) : super(key: key);
+
+  final String date;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 5),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: EdgeInsets.all(5),
+              child: Text(date, style: TextStyle(color: Colors.white)),
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade400,
+                  borderRadius: BorderRadius.all(Radius.circular(5))
+              ),
+            )
+          ]
+        )
+      )
+    );
+  }
+}
+
+
+class DemoChat extends StatefulWidget {
 
   const DemoChat({Key? key, required this.avatarURL, required this.name}) : super(key: key);
 
@@ -101,13 +132,41 @@ class DemoChat extends StatelessWidget {
   final String name;
 
   @override
+  State<DemoChat> createState() => _DemoChatState();
+}
+
+
+class _DemoChatState extends State<DemoChat> {
+
+  Widget buildMarquee(String text){
+    if(text.length > 13){
+      return Marquee(
+          text: text,
+          style: TextStyle(fontFamily: "Poppins", fontSize: 35),
+          blankSpace: 100,
+          pauseAfterRound: Duration(seconds: 5),
+          startAfter: Duration(seconds: 5)
+      );
+    }
+    else{
+      return Text(
+          text,
+          style: TextStyle(fontFamily: "Poppins", fontSize: 35),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    
+
     var textController = TextEditingController();
-    
+
     return Scaffold(
       appBar: AppBar(
-          title: Text(name, style: TextStyle(fontFamily: "Poppins", fontSize: 35)),
+          title: SizedBox(
+            height: 40,
+            child: buildMarquee(widget.name)
+          ),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           foregroundColor: Colors.black,
           elevation: 0,
@@ -116,7 +175,7 @@ class DemoChat extends StatelessWidget {
                 padding: EdgeInsets.only(right: 20),
                 child: CircleAvatar(
                     radius: 20,
-                    backgroundImage: NetworkImage(avatarURL)
+                    backgroundImage: NetworkImage(widget.avatarURL)
                 )
             )
           ]
@@ -128,6 +187,8 @@ class DemoChat extends StatelessWidget {
             padding: EdgeInsets.only(top: 20),
             child: ListView(
               children: [
+
+                DateHeader(date: "7 Januari 2022"),
 
                 Bubble(
                   message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
@@ -159,6 +220,15 @@ class DemoChat extends StatelessWidget {
                   delivered: true,
                   isMe: true,
                 ),
+
+                DateHeader(date: "Today"),
+                Bubble(
+                  message: 'p',
+                  time: '12:01',
+                  delivered: true,
+                  isMe: false,
+                ),
+
               ],
             )
           ),

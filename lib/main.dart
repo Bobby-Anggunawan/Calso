@@ -7,6 +7,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'contact_page.dart';
 import 'demo/demo_chat_page.dart';
 import 'demo/demo_home_page.dart';
+import 'demo/demo_login_page.dart';
+import 'demo/demo_main_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -38,7 +40,8 @@ class _MyAppState extends State<MyApp> {
         '/contact': (context) => ContactPage(),
         '/': (context) => Mediator(),*/
 
-        '/': (context) => DemoHomePage(),
+        //'/': (context) => DemoLoginPage(),
+        '/': (context) => DemoMainPage(),
         '/chat': (context) => DemoChat(avatarURL:"https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg", name:"aa"),
       },
 
